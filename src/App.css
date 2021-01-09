@@ -15,17 +15,21 @@
 
 .App-header {
   background-color: #282c34;
+  background-image: url(images/deck.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items:flex-start;
+  justify-content:first baseline;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .App-link {
-  color: #61dafb;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content:first baseline;
+  color: #fffbea;
 }
 
 @keyframes App-logo-spin {
