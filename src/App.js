@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <b>
         <p>
-          <code>Your vacation begins</code>
+          <code>Vacationing</code>
         </p>
         </b>
         <a
@@ -19,7 +19,7 @@ function App() {
         >
 
           <b>
-          <code2>here.</code2>
+          <code2>...</code2>
           </b>
           
         </a>

@@ -9,7 +9,7 @@ import Signin from './signin';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Signin />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
