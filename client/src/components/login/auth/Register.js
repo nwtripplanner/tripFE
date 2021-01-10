@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authActions";
 import classnames from "classnames";
+import { Grommet, Box, Form, Button, TextInput } from "grommet";
 
 class Register extends Component {
   constructor() {
@@ -50,9 +51,9 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div>
-        <div>
-          <div>
+      <Grommet>
+        <Box justify="center" direction="row-responsive">
+          <Box direction="column">
             <Link to="/">
               <i>keyboard_backspace</i> Back to home
             </Link>
@@ -64,80 +65,75 @@ class Register extends Component {
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
             </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div>
-                <input
+            <Form noValidate onSubmit={this.onSubmit}>
+              <Box pad="small">
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.name}
                   error={errors.name}
                   id="name"
+                  placeholder="name"
+                  textAlign="center"
                   type="text"
                   className={classnames("", {
                     invalid: errors.name
                   })}
                 />
-                <label htmlFor="name">Name</label>
                 <span className="red-text">{errors.name}</span>
-              </div>
-              <div>
-                <input
+                </Box>
+                <Box pad="small">
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.email}
                   error={errors.email}
                   id="email"
+                  placeholder="email"
+                  textAlign="center"
                   type="email"
                   className={classnames("", {
                     invalid: errors.email
                   })}
                 />
-                <label htmlFor="email">Email</label>
                 <span className="red-text">{errors.email}</span>
-              </div>
-              <div>
-                <input
+                </Box>
+                <Box pad="small">
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.password}
                   error={errors.password}
                   id="password"
                   type="password"
+                  placeholder="password"
+                  textAlign="center"
                   className={classnames("", {
                     invalid: errors.password
                   })}
                 />
-                <label htmlFor="password">Password</label>
+                </Box>
                 <span className="red-text">{errors.password}</span>
-              </div>
-              <div>
-                <input
+                <Box pad='small'>
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.password2}
                   error={errors.password2}
                   id="password2"
                   type="password"
+                  textAlign="center"
+                  placeholder="confirm password"
                   className={classnames("", {
                     invalid: errors.password2
                   })}
                 />
-                <label htmlFor="password2">Confirm Password</label>
+                  </Box>
                 <span className="red-text">{errors.password2}</span>
-              </div>
-              <div>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem",
-                  }}
-                  type="submit"
-                >
-                  Sign up
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+              <Box pad="medium">
+                <Button onClick={this.onSubmit}
+                   noValidate label="Register Now" pad="xlarge" />
+              </Box>
+            </Form>
+          </Box>
+        </Box>
+      </Grommet>
     );
   }
 }
