@@ -5,14 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Signup from './signup';
 import Signin from './signin';
-import SearchPage from './components/SearchPage';
-import NavBar from './components/NavBar';
+import SearchPage from './homepage/SearchPage';
+import NavBar from './homepage/NavBar';
+import TPage from './transportation/TransportPage';
 
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <NavBar /> */}
     <SearchPage />
+    {/* <TPage /> */}
+    {/* <Inputes /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

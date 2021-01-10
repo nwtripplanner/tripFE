@@ -30,7 +30,7 @@
 
 .Nav-header {
   min-height: 100vh;
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   align-items:baseline;
   justify-content:first baseline;
@@ -50,6 +50,20 @@
   color: white;
 }
 
+.TopLeft {
+  /* background-color: #ccdbf8; */
+  /* background-image: url(images/deck.jpg); */
+  font-size: 100px;
+  min-height: 100vh;
+  display: inline-flex;
+  /* flex-direction: column; */
+  /* align-items:flex-start; */
+  /* justify-content:first baseline; */
+  /* font-size: calc(10px + 2vmin); */
+  /* color: white; */
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .rectangle {
   background-image: url(images/deck.jpg);
   display: inline-block;
@@ -59,6 +73,11 @@
   width: 500px;
   height: 550px;
   background: #ccdbf8;
+}
+
+.Login-Btn {
+  background-color: rgba(229, 233, 204, 0.8);
+  opacity: 0.5;
 }
 
 .info {
@@ -82,3 +101,30 @@
     transform: rotate(360deg);
   }
 }
+
+.flexbox-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.up {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.spacer {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+input[type=text], input[type=password]
+{
+  border:none;
+  border-bottom: 1px solid rgb(153, 74, 74);
+  outline: 0ch;
+  background-color: '#000000'
+}
+
+

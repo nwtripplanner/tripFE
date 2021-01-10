@@ -33,10 +33,18 @@ const SearchPage = (props) => {
     <div className="App">
         <header className="App-header">
 
-          <div className="Nav-header">
+          {/* <div className="Nav-header">  */}
 
-          {/* <img src={tree} className="App-logo" alt="tree" /> */}
-            <a href="link"><navwords>home</navwords></a>
+          {/* <img src={tree} className="App-logo" alt="tree" />*/}
+          <div className="flexbox-container">
+          <div className="spacer"><a href="link"><navwords>home</navwords></a></div>
+          <div className="spacer"><a href="link"><navwords>explore</navwords></a></div>
+          <div className="spacer"><a href="link"><navwords>my trips</navwords></a></div>
+          <div className="spacer"><button className="Login-Btn">sign in</button> </div>
+
+          </div>
+
+
 
         <h3>Vacationing</h3>
 
@@ -46,7 +54,7 @@ const SearchPage = (props) => {
        onChange={updateInput}
       />
       {/* <CountryList countryList={countryList}/> */}
-      </div>
+      {/* </div> */}
       </header>
       </div>
     </>
