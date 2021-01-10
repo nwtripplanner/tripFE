@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
 }
 
 .App-logo {
@@ -20,12 +20,6 @@
 .App-header {
   background-color: #282c34;
   /* background-image: url(images/deck.jpg); */
-<<<<<<< HEAD
-  /* background-image: url(transportation/beach.png); */
-  background-image: url(images/deck.jpg);
-
-=======
->>>>>>> a811434f494ba6cdf2b6d632be5d2198a21b8fa2
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +31,7 @@
 
 .Nav-header {
   /* background-image: url(transportation/beach.png); */
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
 
   min-height:20vh;
   display: inline-block;
@@ -77,12 +71,7 @@
 }
 
 .rectangle {
-<<<<<<< HEAD
-  background-image: url(images/deck.jpg);
-  
-=======
   /* background-image: url(images/deck.jpg); */
->>>>>>> a811434f494ba6cdf2b6d632be5d2198a21b8fa2
   display: inline-block;
   /* display: flex; */
   align-items: center;

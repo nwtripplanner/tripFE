@@ -4,9 +4,9 @@ import SidePanel from './components/sidebar';
 import NavBar from './components/header';
 import Content from './components/content';
 
-import {
-    Image
-  } from './components/logo.png';
+// import {
+//     Image
+//   } from './components/logo.png';
 
 
 const AppGrid = () => {

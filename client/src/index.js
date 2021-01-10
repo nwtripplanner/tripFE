@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'
+// import App from './App'
 import reportWebVitals from './reportWebVitals';
 // import Signup from './signup';
 // import Signin from './signin';
-import SearchPage from './components/SearchPage';
+// import SearchPage from './components/SearchPage';
 // import NavBar from './components/NavBar';
-import Transport from './transportation/TransportPage';
-import TPage from './transportation/TPage';
+// import Transport from './components/transportation/TransportPage';
+import TPage from './components/transportation/TPage.jsx';
 
 
 ReactDOM.render(
