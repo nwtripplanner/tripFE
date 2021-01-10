@@ -12,7 +12,13 @@ const trip = require("./models/Trip")
 const app = express();
 const db = require('./db')
 
-// module.exports = mongoose.model("User", UserSchema);
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 db.once('open', function () {
   console.log("Connected!");
@@ -174,23 +180,46 @@ app.get("/cost/accommodation/:name", (req, res) => {
     });
 });
 
-app.get("/cost/activities/:name", (req, res) => {
+// Returns the cost of all the transportations for the trip with the given name
+app.get("/cost/tripID/:tripName/transportations/", (req, res) => {
   trip.findOne({name : req.params.tripName})
-    .then(activity => {
-      if (!activity) {
+    .then(selectedTrip => {
+      if (!selectedTrip) {
         res.status(404).send();
       }
-      activArray = activity[0].activities;
-      total = 0;
-      for (i = 0; i < activArray.length; i++) {
-        total += activArray[i].cost;
-      }
-      res.send(total.toString());
+      res.send(tripPartsCost(selectedTrip.transportations).toString());
     }).catch((e) => {
       res.status(400).send(e);
     });
 });
 
+// Returns the cost of all the accommodations for the trip with the given name
+app.get("/cost/tripID/:tripName/accommodations/", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(tripPartsCost(selectedTrip.accommodations).toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns the cost of all the activities for the trip with the given name
+app.get("/cost/tripID/:tripName/activities/", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(tripPartsCost(selectedTrip.activities).toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns the cost of the trip with the given trip name
 app.get("/cost/tripID/:tripName", (req, res) => {
   trip.findOne({name : req.params.tripName})
     .then(selectedTrip => {
@@ -203,6 +232,7 @@ app.get("/cost/tripID/:tripName", (req, res) => {
     });
 });
 
+// Returns the cost of all the trips
 app.get("/cost/trips", (req, res) => {
   trip.find({})
     .then(allTrips => {
@@ -215,6 +245,7 @@ app.get("/cost/trips", (req, res) => {
     });
 });
 
+// Returns the trip with the given trip name
 app.get("/tripID/:tripName", (req, res) => {
   trip.findOne({name : req.params.tripName})
     .then(selectedTrip => {
@@ -227,6 +258,7 @@ app.get("/tripID/:tripName", (req, res) => {
     });
 });
 
+// Returns all trips
 app.get("/trips", (req, res) => {
   trip.find({})
     .then(allTrips => {
@@ -241,11 +273,10 @@ app.get("/trips", (req, res) => {
 
 function tripsCost(trips) {
   tripsTotal = 0;
-  console.log("set total to 0")
-  for (i = 0; i < trips.length; i++) {
-    tripsTotal += tripCost(trips[i]);
+  for (j = 0; j < trips.length; j++) {
+    tripsTotal += tripCost(trips[j]);
   }
-  return trips.length;
+  return tripsTotal;
 }
 
 function tripCost(trip) {
@@ -273,4 +304,4 @@ app.use(passport.initialize());
 
 app.post("/register", (req, res) => { });
 
-app.listen(3000, () => console.log("started"));
+app.listen(5000, () => console.log("started"));

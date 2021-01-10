@@ -4,7 +4,12 @@
   "description": "Node.js Restful CRUD API with Node.js, Express and MongoDB for nwtripplanner",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd /mnt/c/Users/Martin/Projects/tripFE/client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
