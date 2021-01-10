@@ -9,7 +9,6 @@ import reportWebVitals from './reportWebVitals';
 // import NavBar from './components/NavBar';
 // import Transport from './components/transportation/TransportPage';
 import App from './App'
-import TPage from './components/transportation/TPage.jsx';
 
 
 ReactDOM.render(
