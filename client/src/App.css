@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
 }
 
 .App-logo {
@@ -20,9 +20,6 @@
 .App-header {
   background-color: #282c34;
   /* background-image: url(images/deck.jpg); */
-  /* background-image: url(transportation/beach.png); */
-  background-image: url(images/deck.jpg);
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,7 +31,7 @@
 
 .Nav-header {
   /* background-image: url(transportation/beach.png); */
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
 
   min-height:20vh;
   display: inline-block;
@@ -74,8 +71,7 @@
 }
 
 .rectangle {
-  background-image: url(images/deck.jpg);
-  
+  /* background-image: url(images/deck.jpg); */
   display: inline-block;
   /* display: flex; */
   align-items: center;
@@ -132,5 +128,3 @@ input[type=text], input[type=password]
   outline: 0ch;
   background-color: '#000000'
 }
-
-

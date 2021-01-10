@@ -2,7 +2,14 @@ import React, { Component, useState, useEffect } from 'react';
 import { Grommet, Header, Main, Text, Box, Button, Grid, grommet, Avatar, Image } from 'grommet';
 // import SidePanel from './components/sidebar';
 import Content from './components/content';
+<<<<<<< HEAD:client/src/components/accomod/APage.jsx
 import NavBar from './components/header';
+=======
+
+// import {
+//     Image
+//   } from './components/logo.png';
+>>>>>>> 043df7edae55d8b3e82c0a4a38411419d4f5b0c7:client/src/components/transportation/TPage.jsx
 
 
 const AppGrid = () => {

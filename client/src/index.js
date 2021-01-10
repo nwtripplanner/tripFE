@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'
+// import App from './App'
 import reportWebVitals from './reportWebVitals';
 // import Signup from './signup';
 // import Signin from './signin';
@@ -12,7 +12,6 @@ import Reg from './components/login/auth/Register';
 
 import APage from './components/accomod/APage';
 import Filter from './components/accomod/components/filter';
-
 
 
 
