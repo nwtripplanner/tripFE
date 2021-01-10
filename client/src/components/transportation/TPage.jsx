@@ -23,7 +23,6 @@ import { logoutUser } from "../login/actions/authActions";
 //   } from './components/logo.png';
 
 const AppGrid = (props) => {
-
   const [sidebar, setSidebar] = useState(true);
 
   return (
@@ -54,17 +53,19 @@ const AppGrid = (props) => {
           <NavBar />
           <Grommet>
             <Box direction="row-responsive">
-            {/* <Avatar
+              {/* <Avatar
               border={{ size: "small", color: "accent-2" }}
               background="white"
-              flex={true}
+              flex={false}
             >
     
             </Avatar> */}
-            <Box justify="center" direction="column"><Text>{props.user.name.split(" ")[0]}</Text></Box>
-            <Box pad="medium" direction="column" justify="center">
-            <Button color="white" label="logout" onClick={props.logout}/>
-            </Box>
+              <Box justify="center" direction="column">
+                <Text>{props.user.name.split(" ")[0]}</Text>
+              </Box>
+              <Box pad="medium" direction="column" justify="center">
+                <Button color="white" label="logout" onClick={props.logout} />
+              </Box>
             </Box>
           </Grommet>
         </Box>
@@ -84,6 +85,7 @@ const AppGrid = (props) => {
                 background="white"
                 flex={false}
               >
+                SY
               </Avatar>,
               "Transportation",
               "Accomodation",
@@ -108,17 +110,14 @@ const AppGrid = (props) => {
 };
 
 class TPage extends Component {
-  
   state = {};
-
   onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
-
   render() {
+  
     const { user } = this.props.auth;
-    console.log(user)
     return (
       <Grommet>
         <AppGrid user={user} logout={this.onLogoutClick} />
@@ -129,13 +128,9 @@ class TPage extends Component {
 
 TPage.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(TPage);
-
+export default connect(mapStateToProps, { logoutUser })(TPage);
