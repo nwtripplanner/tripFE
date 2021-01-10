@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-//const users = require("./routes/api/users");
+const users = require("./routes/api/users");
 const activity = require("./models/Activity");
 const transportation = require("./models/Transportation");
 const accommodation = require("./models/Accommodation");
@@ -334,9 +334,9 @@ function tripPartCost(tripPart) {
 
 app.use(passport.initialize());
 
-//require("./config/passport")(passport);
+require("./config/passport")(passport);
 
-//app.use("/api/users", users);
+app.use("/api/users", users);
 
 app.post("/register", (req, res) => { });
 
