@@ -10,6 +10,7 @@ import {
   Button,
   Text,
   defaultProps,
+  TextInput
 } from "grommet";
 import { grommet, ThemeType } from "grommet/themes";
 import { deepMerge } from "grommet/utils";
@@ -64,10 +65,12 @@ const When = (props) => {
 };
 
 class Content extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state= {trans}
-  //   }
+    constructor() {
+      super();
+      this.state= {};
+      this.onInputchange = this.onInputchange.bind(this);
+ 
+    }
 
   //   componentDidMount() {
   //     axios.get('/create/transportation')
@@ -80,6 +83,34 @@ class Content extends Component {
   // }
 
   state = {};
+
+  onInputchange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+}
+
+handleChangeInputMode = async event => {
+  const mode = event.target.value
+  this.setState({ mode })
+}
+
+handleChangeInputStart = async event => {
+  const start = event.target.value
+  this.setState({ start })
+}
+
+handleChangeInputDest = async event => {
+  const destination = event.target.value
+  this.setState({ destination })
+}
+
+handleChangeInputGuest = async event => {
+  const time = event.target.value
+  this.setState({ time })
+}
+
+
 
   onSave = (e) => {
     console.log("r");
@@ -117,7 +148,7 @@ class Content extends Component {
           <h1>Name This Trip</h1>
           <h3>First, let's give this trip a name:</h3>
           <FormField horizontal="small">
-            <TextArea
+            <TextInput
               id="text-area"
               size="large"
               placeholder="Trip with the girls!"
@@ -128,21 +159,21 @@ class Content extends Component {
 
           <Box width="medium" direction="row-responsive">
             <FormField label="Mode of Transportation" htmlFor="text-area">
-              <TextArea id="text-area" placeholder="plane or vehicle" />
+              <TextInput id="text-area" placeholder="plane or vehicle" value={this.state.mode}  onChange={this.handleChangeInputMode}/>
             </FormField>
             <Box pad="medium"></Box>
-            <FormField label="Number of Guests" htmlFor="text-area">
-              <TextArea id="text-area" placeholder="#" />
+            <FormField label="Number of Guests" htmlFor="text-area" value={this.state.time} onChange={this.handleChangeInputGuest}>
+              <TextInput id="text-area" placeholder="#" />
             </FormField>
           </Box>
 
           <Box width="medium" direction="row-responsive">
             <FormField label="From" htmlFor="text-area">
-              <TextArea id="text-area" placeholder="Current Location" />
+              <TextInput id="text-area" placeholder="Current Location" value={this.state.start}  onChange={this.handleChangeInputStart}/>
             </FormField>
             <Box pad="medium" />
             <FormField label="To" htmlFor="text-area">
-              <TextArea id="text-area" placeholder="Dream Destination" />
+              <TextInput id="text-area" placeholder="Dream Destination" value={this.state.destination}  onChange={this.handleChangeInputDest}/>
             </FormField>
           </Box>
           <When submit={this.onSave} />
