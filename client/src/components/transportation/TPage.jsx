@@ -54,16 +54,16 @@ const AppGrid = (props) => {
           <NavBar />
           <Grommet>
             <Box direction="row-responsive">
-            <Avatar
+            {/* <Avatar
               border={{ size: "small", color: "accent-2" }}
               background="white"
               flex={true}
             >
     
-            </Avatar>
-            <Text>{props.user.name.split(" ")[0]}</Text>
+            </Avatar> */}
+            <Box justify="center" direction="column"><Text>{props.user.name.split(" ")[0]}</Text></Box>
             <Box pad="medium" direction="column" justify="center">
-            <Button label="logout" onClick={props.logout}/>
+            <Button color="white" label="logout" onClick={props.logout}/>
             </Box>
             </Box>
           </Grommet>
@@ -84,7 +84,6 @@ const AppGrid = (props) => {
                 background="white"
                 flex={false}
               >
-                Logout
               </Avatar>,
               "Transportation",
               "Accomodation",
