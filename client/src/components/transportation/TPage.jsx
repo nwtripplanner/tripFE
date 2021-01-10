@@ -1,8 +1,22 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Grommet, Header, Main, Text, Box, Button, Grid, grommet, Avatar, Image } from 'grommet';
-import SidePanel from './components/sidebar';
-import NavBar from './components/header';
-import Content from './components/content';
+import React, { Component, useState, useEffect } from "react";
+import {
+  Grommet,
+  Header,
+  Main,
+  Text,
+  Box,
+  Button,
+  Grid,
+  grommet,
+  Avatar,
+  Image,
+} from "grommet";
+import SidePanel from "./components/sidebar";
+import NavBar from "./components/header";
+import Content from "./components/content";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../login/actions/authActions";
 
 // import {
 //     Image
@@ -100,5 +114,6 @@ class TPage extends Component {
     );
   }
 }
+
 
 export default TPage;
