@@ -5,13 +5,19 @@ import App from './App'
 import reportWebVitals from './reportWebVitals';
 // import Signup from './signup';
 // import Signin from './signin';
-// import SearchPage from './components/SearchPage';
+import SearchPage from './components/SearchPage';
 // import NavBar from './components/NavBar';
+import Transport from './transportation/TransportPage';
+import TPage from './transportation/TPage';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Transport /> */}
+    {/* <SearchPage /> */}
+    {/* <App /> */}
+    <TPage />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
