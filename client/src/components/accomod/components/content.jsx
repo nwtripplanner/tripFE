@@ -4,6 +4,9 @@ import { Box, Select, FormField, Grommet, TextArea, DateInput, Grid, Button, Tex
 import { grommet, ThemeType, ThemeContext } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
+import Filter from './filter';
+
+
 const customTheme = {
     global: {
       font: {
@@ -60,7 +63,7 @@ const options = ['Hotel Choices......'];
 const Hotel = () => {
   const [value, setValue] = useState();
   return (
-    <Box fill align="center" justify="start" basis="xlarge" pad="xsmall">
+    <Box fill align="center" justify="start" basis="xlarge">
       <Select
         placeholder="Hotels"
         multiple
@@ -72,27 +75,6 @@ const Hotel = () => {
     </Box>
   );
 };
-
-
-const ClearForm = () => {
-  const [value, setValue] = useState();
-  return (
-    <Box fill align="center" justify="start" pad="large">
-      <FormField label="Numbers" name="numbers">
-        <Select
-          name="numbers"
-          placeholder="Clear within formfield"
-          multiple
-          options={options}
-          value={value}
-          clear
-          onChange={({ value: nextValue }) => setValue(nextValue)}
-        />
-      </FormField>
-    </Box>
-  );
-};
-
 
 
 
@@ -113,9 +95,9 @@ class Content extends Component {
                     </FormField>
                     <h1>Accomodation</h1>
                     <h3>Where will you stay? Skip this step if you already have a place!</h3>
-                    <Box width="medium" direction="row-responsive" >
-                    <Hotel />
-                    </Box>
+                    <Filter/> 
+                    
+                    <Hotel /> 
 
 
                 </Box>

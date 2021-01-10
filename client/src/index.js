@@ -21,8 +21,8 @@ ReactDOM.render(
     {/* <SearchPage /> */}
     {/* <App /> */}
     {/* <TPage /> */}
-    <Filter />
-    {/* <APage /> */}
+    {/* <Filter /> */}
+    <APage />
 
   </React.StrictMode>,
   document.getElementById('root')
