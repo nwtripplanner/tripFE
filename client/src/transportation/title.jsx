@@ -21,7 +21,7 @@ const Title = ({keyword,setKeyword}) => {
        style={BarStyling}
        key="random1"
        value={keyword}
-       placeholder={"Name Your Trip"}
+       placeholder={"Name This Trip"}
        onChange={(e) => setKeyword(e.target.value)}
       />
     );
