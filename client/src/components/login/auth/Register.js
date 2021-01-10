@@ -6,6 +6,13 @@ import { registerUser } from "../actions/authActions";
 import classnames from "classnames";
 import { Grommet, Box, Form, Button, TextInput } from "grommet";
 
+import Background from '../../../assets/rece1080.jpg'; 
+
+var sectionStyle = {
+  backgroundImage: `url(${Background})`,
+  "opacity": true,
+};
+
 class Register extends Component {
   constructor() {
     super();
@@ -51,7 +58,7 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <Grommet>
+      <Grommet style={sectionStyle} full>
         <Box justify="center" direction="row-responsive">
           <Box direction="column">
             <Link to="/">
