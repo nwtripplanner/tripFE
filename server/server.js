@@ -24,87 +24,6 @@ db.once('open', function () {
   console.log("Connected!");
 });
 
-
-const testActivity = new activity({
-  time: new Date,
-  name: "Cycling",
-  location: "Sea Wall",
-  type: "Sport",
-  cost: 50
-});
-const testActivity1 = new activity({
-  time: new Date,
-  name: "Hiking",
-  location: "Grouse Grind",
-  type: "Sport",
-  cost: 20
-});
-
-const testAccommodation = new accommodation({
-  time: new Date,
-  name: "Fairmont Hotel",
-  location: "Downtown Vancouver",
-  type: "Hotel",
-  cost: 500
-});
-const testAccommodation1 = new accommodation({
-  time: new Date,
-  name: "Cabin on the mountain",
-  location: "Grouse Mountain",
-  type: "Airbnb",
-  cost: 300
-});
-
-const testTransportation = new transportation({
-  time: new Date,
-  mode: "Bus",
-  start: "Fairmont Hotel",
-  destination: "Stanley Park",
-  cost: 2.85
-});
-
-const testTransportation1 = new transportation({
-  time: new Date,
-  mode: "Taxi",
-  start: "Stanley Park",
-  destination: "Grouse Mountain",
-  cost: 30
-});
-
-const testTrip = new trip({
-  name : "Test Trip",
-  startDay: new Date,
-  endDay: new Date,
-  startLoc: "Downtown Vancouver",
-  endLoc: "Grouse Mountain",
-  savings: 700,
-  transportations: [testTransportation, testTransportation1],
-  accommodations: [testAccommodation, testAccommodation1],
-  activities: [testActivity, testActivity1]
-});
-
-// testAccommodation.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testAccommodation1.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testActivity.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testActivity1.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testTransportation.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testTransportation1.save(function (err) {
-//   if (err) return console.error(err);
-// });
-// testTrip.save(function (err) {
-//   if (err) return console.error(err);
-// });
-
 app.get("/", (req, res) => {
   trip.find({})
   .then(allTrips => {
@@ -132,49 +51,166 @@ app.post("/createtrip", (req, res) => {
   })
 });
 
-app.get("/cost/transportation/:transportationMode-:transportationStart-:transportationEnd/tripid/:tripName", (req, res) => {
-  trip.find({ name: req.params.tripName })
-    .then(selectedTrip => {
-      if (!selectedTrip) {
-        res.status(404).send();
-      }
-      transpoArray = selectedTrip.transportations;
-      selectTranspo = transpoArray.find({mode: req.params.transportationMode, start: req.params.transportationStart, destination: req.params.transportationEnd})
-      res.send("hello");
-    }).catch((e) => {
-      res.status(400).send(e);
-    });
-});
-
-app.get("/cost/transportation/tripid/:tripName", (req, res) => {
-  trip.findOne({ name: req.params.tripName })
-    .then(selectedTrip => {
-      if (!selectedTrip) {
-        res.status(404).send();
-      }
-      transpoArray = selectedTrip.transportations;
-      total = 0;
-      for (i = 0; i < transpoArray.length; i++) {
-        total += transpoArray[i].cost;
-      }
-      res.send(total.toString());
-    }).catch((e) => {
-      res.status(400).send(e);
-    });
-});
-
-app.get("/cost/accommodation/:name", (req, res) => {
+// Returns the activity with the given information for the trip with the given name
+app.get("/tripID/:tripName/activityID/:activityName", (req, res) => {
   trip.findOne({name : req.params.tripName})
-    .then(accommodation => {
-      if (!accommodation) {
+    .then(selectedTrip => {
+      if (!selectedTrip) {
         res.status(404).send();
       }
-      accomArray = accommodation[0].accommodations;
-      total = 0;
-      for (i = 0; i < accomArray.length; i++) {
-        total += accomArray[i].cost;
+      activ = selectedTrip.activities;
+      for (n = 0; n < activ.length; n++) {
+        selectedActiv = activ[n];
+        if (selectedActiv.name == req.params.activityName) {
+          res.send(selectedActiv);
+        }
       }
-      res.send(total.toString());
+      res.send("This activity doesn't exist!");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+
+// Returns the accommodation with the given information for the trip with the given name
+app.get("/tripID/:tripName/accommodationID/:accommodationName", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      accomm = selectedTrip.accommodations;
+      for (m = 0; m < accomm.length; m++) {
+        selectedAccomm = accomm[m];
+        if (selectedAccomm.name == req.params.accommodationName) {
+          res.send(selectedAccomm);
+        }
+      }
+      res.send("This accommodation doesn't exist!");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns the transportation with the given information for the trip with the given name
+app.get("/tripID/:tripName/transportationID/:transportationMode-:transportationStart-:transportationEnd", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      transpo = selectedTrip.transportations;
+      for (l = 0; l < transpo.length; l++) {
+        selectedTranspo = transpo[l];
+        if (selectedTranspo.mode == req.params.transportationMode &&
+          selectedTranspo.start == req.params.transportationStart &&
+          selectedTranspo.destination == req.params.transportationEnd) {
+          res.send(selectedTranspo);
+        }
+      }
+      res.send("This transportation doesn't exist!");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns all the transportations for the trip with the given name
+app.get("/tripID/:tripName/transportations/", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(selectedTrip.transportations);
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns all the accommodations for the trip with the given name
+app.get("/tripID/:tripName/accommodations/", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(selectedTrip.accommodations);
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns all the activities for the trip with the given name
+app.get("/tripID/:tripName/activities/", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(selectedTrip.activities);
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns the cost of the activity with the given information for the trip with the given name
+app.get("/cost/tripID/:tripName/activityID/:activityName", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      activ = selectedTrip.activities;
+      for (n = 0; n < activ.length; n++) {
+        selectedActiv = activ[n];
+        if (selectedActiv.name == req.params.activityName) {
+          res.send(tripPartCost(selectedActiv).toString());
+        }
+      }
+      res.send("This activity doesn't exist!");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+
+// Returns the cost of the accommodation with the given information for the trip with the given name
+app.get("/cost/tripID/:tripName/accommodationID/:accommodationName", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      accomm = selectedTrip.accommodations;
+      for (m = 0; m < accomm.length; m++) {
+        selectedAccomm = accomm[m];
+        if (selectedAccomm.name == req.params.accommodationName) {
+          res.send(tripPartCost(selectedAccomm).toString());
+        }
+      }
+      res.send("This accommodation doesn't exist!");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+// Returns the cost of the transportation with the given information for the trip with the given name
+app.get("/cost/tripID/:tripName/transportationID/:transportationMode-:transportationStart-:transportationEnd", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      transpo = selectedTrip.transportations;
+      for (l = 0; l < transpo.length; l++) {
+        selectedTranspo = transpo[l];
+        if (selectedTranspo.mode == req.params.transportationMode &&
+          selectedTranspo.start == req.params.transportationStart &&
+          selectedTranspo.destination == req.params.transportationEnd) {
+          res.send(tripPartCost(selectedTranspo).toString());
+        }
+      }
+      res.send("This transportation doesn't exist!");
     }).catch((e) => {
       res.status(400).send(e);
     });
