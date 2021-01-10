@@ -9,7 +9,8 @@ import reportWebVitals from './reportWebVitals';
 // import NavBar from './components/NavBar';
 // import Transport from './components/transportation/TransportPage';
 import App from './App'
-import TPage from './components/transportation/TPage.jsx';
+// import TPage from './components/transportation/TPage.jsx';
+import TPage from './components/transportation/TPage';
 
 
 ReactDOM.render(
@@ -18,7 +19,7 @@ ReactDOM.render(
     {/* <SearchPage /> */}
     {/* <App /> */}
     <App />
-
+{/* <TPage /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
