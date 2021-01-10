@@ -67,7 +67,7 @@ export const Distance = () => {
   const [value, setValue] = useState(postMethods[0]);
 
   return (
-    <Box direction="row-responsive" background="light-2">
+    <Box align="center" direction="row-responsive" background="white">
     <Text >Distance: </Text>
     
     <RadioButtonGroup
