@@ -18,7 +18,7 @@
 
 .App-header {
   background-color: #282c34;
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
 
 .SU-header {
   /* background-color: #ccdbf8; */
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@
 }
 
 .rectangle {
-  background-image: url(images/deck.jpg);
+  /* background-image: url(images/deck.jpg); */
   display: inline-block;
   /* display: flex; */
   align-items: center;
@@ -126,5 +126,3 @@ input[type=text], input[type=password]
   outline: 0ch;
   background-color: '#000000'
 }
-
-
