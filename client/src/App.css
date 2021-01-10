@@ -25,6 +25,35 @@
   color: white;
 }
 
+.SU-header {
+  /* background-color: #ccdbf8; */
+  background-image: url(images/deck.jpg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:first baseline;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.rectangle {
+  background-image: url(images/deck.jpg);
+  display: inline-block;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 550px;
+  background: #ccdbf8;
+}
+
+.info {
+  color: black;
+  align-items:flex-start;
+  justify-content:baseline;
+}
+
 .App-link {
   flex-direction: column;
   align-items:flex-start;

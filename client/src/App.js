@@ -8,30 +8,18 @@ function App() {
       <header className="App-header">
         <b>
         <p>
-          <code>Your vacation begins</code>
+          <code>Vacationing</code>
         </p>
         </b>
         <a
           className="App-link"
-          // href="https://reactjs.org"
-
-
-        <script>
-        function pageRedirect() {
-        window.location.href = "https://www.tutorialrepublic.com/";
-        }      
-          </script> 
-        <button type="button" onclick="pageRedirect()">Go to Tutorial Republic</button>
-          
-
-
-
-
+          href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
+
           <b>
-          <code2>here.</code2>
+          <code2>...</code2>
           </b>
           
         </a>

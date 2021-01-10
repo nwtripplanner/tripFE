@@ -1,11 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 
 const app = express();
+const db = require('./db')
 
-
-module.exports = mongoose.model("User", UserSchema);
+// module.exports = mongoose.model("User", UserSchema);
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get("/", (req, res) => {
   res.send("hello");
