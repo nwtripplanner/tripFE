@@ -1,10 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-<<<<<<< HEAD
 const bcrypt = require("bcryptjs");
-=======
-const bcrypt = require("bcrypt");
->>>>>>> 6765f64deb6019a60e29b8f62726649058faf96e
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/users");
