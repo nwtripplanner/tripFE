@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 //const users = require("./routes/api/users");
+const activity = require("./models/Activity");
+const transportation = require("./models/Transportation");
+const accommodation = require("./models/Accommodation");
+const trip = require("./models/Trip")
 
 const app = express();
 const db = require('./db')
@@ -14,44 +18,7 @@ db.once('open', function () {
   console.log("Connected!");
 });
 
-const activitySchema = new mongoose.Schema({
-  time: Date,
-  name: String,
-  location: String,
-  type: String,
-  cost: Number
-});
-const activity = mongoose.model('activity', activitySchema);
 
-const accomadationSchema = new mongoose.Schema({
-  time: Date,
-  name: String,
-  location: String,
-  type: String,
-  cost: Number
-});
-const accomadation = mongoose.model('accomadation', accomadationSchema);
-
-const transportationSchema = new mongoose.Schema({
-  time: Date,
-  mode: String,
-  start: String,
-  destination: String,
-  cost: Number
-});
-const transportation = mongoose.model('transportation', transportationSchema)
-
-const tripSchema = new mongoose.Schema({
-  startDay: Date,
-  endDay: Date,
-  startLoc: String,
-  endLoc: String,
-  savings: Number,
-  transportations: [transportationSchema],
-  accomadations: [accomadationSchema],
-  activities: [activitySchema]
-});
-const trip = mongoose.model('trip', tripSchema);
 const testActivity = new activity({
   time: new Date,
   name: "Cycling",
@@ -67,14 +34,14 @@ const testActivity1 = new activity({
   cost: 20
 });
 
-const testAccomadation = new accomadation({
+const testAccommodation = new accommodation({
   time: new Date,
   name: "Fairmont Hotel",
   location: "Downtown Vancouver",
   type: "Hotel",
   cost: 500
 });
-const testAccomadation1 = new accomadation({
+const testAccommodation1 = new accommodation({
   time: new Date,
   name: "Cabin on the mountain",
   location: "Grouse Mountain",
@@ -99,51 +66,204 @@ const testTransportation1 = new transportation({
 });
 
 const testTrip = new trip({
+  name : "Test Trip",
   startDay: new Date,
   endDay: new Date,
   startLoc: "Downtown Vancouver",
   endLoc: "Grouse Mountain",
   savings: 700,
   transportations: [testTransportation, testTransportation1],
-  accomadations: [testAccomadation, testAccomadation1],
+  accommodations: [testAccommodation, testAccommodation1],
   activities: [testActivity, testActivity1]
 });
 
-testAccomadation.save(function (err) {
-  if (err) return console.error(err);
-});
-testAccomadation1.save(function (err) {
-  if (err) return console.error(err);
-});
-testActivity.save(function (err) {
-  if (err) return console.error(err);
-});
-testActivity1.save(function (err) {
-  if (err) return console.error(err);
-});
-testTransportation.save(function (err) {
-  if (err) return console.error(err);
-});
-testTransportation1.save(function (err) {
-  if (err) return console.error(err);
-});
-testTrip.save(function (err) {
-  if (err) return console.error(err);
-});
+// testAccommodation.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testAccommodation1.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testActivity.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testActivity1.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testTransportation.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testTransportation1.save(function (err) {
+//   if (err) return console.error(err);
+// });
+// testTrip.save(function (err) {
+//   if (err) return console.error(err);
+// });
 
 app.get("/", (req, res) => {
-  res.send("hello");
+  trip.find({})
+  .then(allTrips => {
+    if (!allTrips) {
+      res.status(404).send();
+    }
+    res.send(allTrips);
+  }).catch ((e) => {
+    res.status(400).send(e);
+  })
 });
 
 app.post("/createtrip", (req, res) => {
   console.log(req.body);
-  const newTrip = {
-    tripID: req.body.tripID,
-    Name: req.body.tripName,
-    Transportation: req.body.tripTransport,
-    Accomadations: req.body,
-  };
+  const newTrip = new trip({
+    name: req.body.name,
+    startDay: req.body.startDay,
+    endDay: req.body.endDay,
+    startLoc: req.body.startLoc,
+    endLoc: req.body.endLoc,
+    savings: req.body.savings,
+    transportations: req.body.transportations,
+    accommodations: req.body.accommodations,
+    activities: req.body.activities,
+  })
 });
+
+app.get("/cost/transportation/:transportationMode-:transportationStart-:transportationEnd/tripid/:tripName", (req, res) => {
+  trip.find({ name: req.params.tripName })
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      transpoArray = selectedTrip.transportations;
+      selectTranspo = transpoArray.find({mode: req.params.transportationMode, start: req.params.transportationStart, destination: req.params.transportationEnd})
+      res.send("hello");
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/cost/transportation/tripid/:tripName", (req, res) => {
+  trip.findOne({ name: req.params.tripName })
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      transpoArray = selectedTrip.transportations;
+      total = 0;
+      for (i = 0; i < transpoArray.length; i++) {
+        total += transpoArray[i].cost;
+      }
+      res.send(total.toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/cost/accommodation/:name", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(accommodation => {
+      if (!accommodation) {
+        res.status(404).send();
+      }
+      accomArray = accommodation[0].accommodations;
+      total = 0;
+      for (i = 0; i < accomArray.length; i++) {
+        total += accomArray[i].cost;
+      }
+      res.send(total.toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/cost/activities/:name", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(activity => {
+      if (!activity) {
+        res.status(404).send();
+      }
+      activArray = activity[0].activities;
+      total = 0;
+      for (i = 0; i < activArray.length; i++) {
+        total += activArray[i].cost;
+      }
+      res.send(total.toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/cost/tripID/:tripName", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(tripCost(selectedTrip).toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/cost/trips", (req, res) => {
+  trip.find({})
+    .then(allTrips => {
+      if (!allTrips) {
+        res.status(404).send();
+      }
+      res.send(tripsCost(allTrips).toString());
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/tripID/:tripName", (req, res) => {
+  trip.findOne({name : req.params.tripName})
+    .then(selectedTrip => {
+      if (!selectedTrip) {
+        res.status(404).send();
+      }
+      res.send(selectedTrip);
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/trips", (req, res) => {
+  trip.find({})
+    .then(allTrips => {
+      if (!allTrips) {
+        res.status(404).send();
+      }
+      res.send(allTrips);
+    }).catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+function tripsCost(trips) {
+  tripsTotal = 0;
+  console.log("set total to 0")
+  for (i = 0; i < trips.length; i++) {
+    tripsTotal += tripCost(trips[i]);
+  }
+  return trips.length;
+}
+
+function tripCost(trip) {
+  return tripPartsCost(trip.transportations) + tripPartsCost(trip.accommodations) + tripPartsCost(trip.activities);
+}
+
+function tripPartsCost(tripParts) {
+  tripPartsTotal = 0;
+  for (i = 0; i < tripParts.length; i++) {
+    tripPartsTotal += tripPartCost(tripParts[i]);
+  }
+  return tripPartsTotal;
+}
+
+function tripPartCost(tripPart) {
+ return tripPart.cost;
+}
+
 
 app.use(passport.initialize());
 
