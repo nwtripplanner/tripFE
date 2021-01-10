@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 
-import { Box, FormField, Grommet, TextArea, DateInput, Grid, Button, Text } from 'grommet';
-import { grommet, ThemeType } from 'grommet/themes';
+import { Box, Select, FormField, Grommet, TextArea, DateInput, Grid, Button, Text } from 'grommet';
+import { grommet, ThemeType, ThemeContext } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
 const customTheme = {
@@ -25,32 +25,46 @@ const customTheme = {
     },
   };
 
-  const When = ({keyword,setKeyword}) => {
-    const [value, setValue] = React.useState();
-  const onChange = event => {
-    const nextValue = event.value;
-    console.log('onChange', nextValue);
-    setValue(nextValue);
-  };
-  
+
+
+
+
+
+const options = ['Plane, Vehicle, Shuttle'];
+
+const Mode = () => {
+  const [value, setValue] = useState();
   return (
-    <Grommet full theme={grommet}>
-    <Box fill="horizontal" justify="start" align="center">
-      <Box width="medium" direction="row-responsive">
-            <FormField label="Departure Date" htmlFor="text-area">
-            <DateInput format="dd/mm/yyyy" value={value} onChange={onChange} />
-            </FormField>
-
-            <Box pad="medium" />
-
-            <FormField label="Return Date" htmlFor="text-area">
-            <DateInput format="dd/mm/yyyy" value={value} onChange={onChange} />
-            </FormField>
-      </Box>
+    <Box fill align="center" justify="start" basis="xlarge" pad="xsmall">
+      <Select
+        placeholder="Mode of Transportation"
+        multiple
+        value={value}
+        options={options}
+        onChange={({ value: nextValue }) => setValue(nextValue)}
+        clear
+      />
     </Box>
-  </Grommet>
   );
-}
+};
+const optionsG = ['0, 1, 2, 3, 4, 5, 6, 7+']
+const Guests = () => {
+  const [value, setValue] = useState();
+  return (
+    <Box fill align="center" justify="start" basis="xlarge" pad="xsmall">
+      <Select
+        placeholder="Number of Guests"
+        multiple
+        value={value}
+        options={optionsG}
+        onChange={({ value: nextValue }) => setValue(nextValue)}
+        // clear={{ position: 'bottom' }}
+      />
+    </Box>
+  );
+};
+
+
 
 
 
@@ -61,7 +75,7 @@ class Content extends Component {
     render() { 
         return ( 
             <Grommet >
-              <Box align="center">
+              <Box basis="xlarge">
 
               
               <h1>Name This Trip</h1>
@@ -71,9 +85,14 @@ class Content extends Component {
                     </FormField>
                     <h1>Transportation</h1>
                     <h3>Now let's get the basics down!</h3>
+                    <Box width="medium" direction="row-responsive"  >
+                    <Mode />
+                    <Guests />
+                    </Box>
 
-                    <Box width="medium" direction="row-responsive" >
-                    <FormField label="Mode of Transportation" htmlFor="text-area">
+
+                    
+                    {/* <FormField label="Mode of Transportation" htmlFor="text-area">
                         <TextArea id="text-area" placeholder="plane or vehicle" />
                     </FormField>
                     <Box pad="medium">
@@ -81,8 +100,8 @@ class Content extends Component {
                     </Box>
                     <FormField label="Number of Guests" htmlFor="text-area">
                         <TextArea id="text-area" placeholder="#" />
-                    </FormField>
-                    </Box>
+                    </FormField> */}
+                    
 
                     
               <Box width="medium" direction="row-responsive">
@@ -96,8 +115,6 @@ class Content extends Component {
 
                 </Box>      
                 
-
-                <When />
 
 
 

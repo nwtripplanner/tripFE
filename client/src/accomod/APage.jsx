@@ -1,40 +1,12 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Grommet, Header, Main, Text, Box, Button, Grid, grommet, Avatar, Image, DateInput, FormField } from 'grommet';
-import SidePanel from './components/sidebar';
-import NavBar from './components/header';
+import { Grommet, Header, Main, Text, Box, Button, Grid, grommet, Avatar, Image } from 'grommet';
+// import SidePanel from './components/sidebar';
 import Content from './components/content';
-
+import NavBar from './components/header';
 
 
 const AppGrid = () => {
     const [sidebar, setSidebar] = useState(true);
-
-    const When = ({keyword,setKeyword}) => {
-      const [value, setValue] = React.useState();
-    const onChange = event => {
-      const nextValue = event.value;
-      console.log('onChange', nextValue);
-      setValue(nextValue);
-    };
-    
-    return (
-      <Grommet full theme={grommet}>
-      <Box fill="horizontal" justify="start" align="center" background="light-2">
-        <Box width="medium" direction="row-responsive"background="light-2">
-              <FormField label="Departure Date" htmlFor="text-area">
-              <DateInput format="dd/mm/yyyy" value={value} onChange={onChange} />
-              </FormField>
-  
-              <Box pad="medium" background="light-2"/>
-  
-              <FormField label="Return Date" htmlFor="text-area">
-              <DateInput format="dd/mm/yyyy" value={value} onChange={onChange} />
-              </FormField>
-        </Box>
-      </Box>
-    </Grommet>
-    );
-  }
   
     return (
       <Grommet full theme={grommet}>
@@ -45,7 +17,7 @@ const AppGrid = () => {
           areas={[
             { name: 'header', start: [0, 0], end: [1, 0] },
             { name: 'sidebar', start: [0, 1], end: [0, 1] },
-            { name: 'when', start: [1, 1], end: [1, 1] },
+            { name: 'main', start: [1, 1], end: [1, 1] },
           ]}
         >
           <Box
@@ -106,9 +78,8 @@ const AppGrid = () => {
               ))}
             </Box>
           )}
-          <Box gridArea="when" justify="left" align="center" size="contain" background="light-2">
+          <Box gridArea="main" justify="left" align="left" background="light-2" size="contain">
             <Content />
-            <When />
           </Box>
         </Grid>
       </Grommet>

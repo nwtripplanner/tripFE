@@ -6,9 +6,14 @@ import reportWebVitals from './reportWebVitals';
 // import Signup from './signup';
 // import Signin from './signin';
 import SearchPage from './components/SearchPage';
-// import NavBar from './components/NavBar';
-import Transport from './transportation/TransportPage';
 import TPage from './transportation/TPage';
+import Login from './components/login/auth/Login';
+import Reg from './components/login/auth/Register';
+
+import APage from './accomod/APage';
+import Filter from './accomod/components/filter';
+
+
 
 
 ReactDOM.render(
@@ -16,7 +21,9 @@ ReactDOM.render(
     {/* <Transport /> */}
     {/* <SearchPage /> */}
     {/* <App /> */}
-    <TPage />
+    {/* <TPage /> */}
+    <Filter />
+    {/* <APage /> */}
 
   </React.StrictMode>,
   document.getElementById('root')
