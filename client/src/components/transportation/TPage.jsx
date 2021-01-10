@@ -22,20 +22,20 @@ import { logoutUser } from "../login/actions/authActions";
 //     Image
 //   } from './components/logo.png';
 
-const AppGrid = (props) => {
 
+const AppGrid = () => {
   const [sidebar, setSidebar] = useState(true);
 
   return (
     <Grommet full theme={grommet}>
       <Grid
         fill
-        rows={["auto", "flex"]}
-        columns={["auto", "flex"]}
+        rows={['auto', 'flex']}
+        columns={['auto', 'flex']}
         areas={[
-          { name: "header", start: [0, 0], end: [1, 0] },
-          { name: "sidebar", start: [0, 1], end: [0, 1] },
-          { name: "main", start: [1, 1], end: [1, 1] },
+          { name: 'header', start: [0, 0], end: [1, 0] },
+          { name: 'sidebar', start: [0, 1], end: [0, 1] },
+          { name: 'main', start: [1, 1], end: [1, 1] },
         ]}
       >
         <Box
@@ -43,30 +43,28 @@ const AppGrid = (props) => {
           direction="row"
           align="center"
           justify="between"
-          pad={{ horizontal: "medium", vertical: "small" }}
+          pad={{ horizontal: 'medium', vertical: 'small' }}
           background="dark-2"
         >
-          <Image src="//v2.grommet.io/logo.png" />
+          <Image
+            src="//v2.grommet.io/logo.png"
+          />
 
           <Button onClick={() => setSidebar(!sidebar)}>
             <Text size="large">TripSuite</Text>
           </Button>
           <NavBar />
           <Grommet>
-            <Box direction="row-responsive">
             <Avatar
-              border={{ size: "small", color: "accent-2" }}
+              border={{ size: 'small', color: 'accent-2' }}
               background="white"
-              flex={true}
+              flex={false}
             >
-    
-            </Avatar>
-            <Text>{props.user.name.split(" ")[0]}</Text>
-            <Box pad="medium" direction="column" justify="center">
-            <Button label="logout" onClick={props.logout}/>
-            </Box>
-            </Box>
+              SY
+  </Avatar>
+            <Text>Jane Doe</Text>
           </Grommet>
+
         </Box>
         {sidebar && (
           <Box
@@ -74,30 +72,27 @@ const AppGrid = (props) => {
             background="dark-3"
             width="small"
             animation={[
-              { type: "fadeIn", duration: 500 },
-              { type: "slideRight", size: "xlarge", duration: 150 },
+              { type: 'fadeIn', duration: 500 },
+              { type: 'slideRight', size: 'xlarge', duration: 150 },
             ]}
           >
-            {[
-              <Avatar
-                border={{ size: "small", color: "accent-2" }}
-                background="white"
-                flex={false}
-              >
-                Logout
-              </Avatar>,
-              "Transportation",
-              "Accomodation",
-              "Lifestyle",
-              "Costs",
-              "Plan Trip!",
-            ].map((name) => (
-              <Button key={name} href="#" hoverIndicator>
-                <Box pad={{ horizontal: "medium", vertical: "small" }}>
-                  <Text>{name}</Text>
-                </Box>
-              </Button>
-            ))}
+
+
+
+            {[<Avatar
+              border={{ size: 'small', color: 'accent-2' }}
+              background="white"
+              flex={false}
+            >
+              SY
+  </Avatar>,
+              'Transportation', 'Accomodation', 'Lifestyle', 'Costs', 'Plan Trip!'].map(name => (
+                <Button key={name} href="#" hoverIndicator>
+                  <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+                    <Text>{name}</Text>
+                  </Box>
+                </Button>
+              ))}
           </Box>
         )}
         <Box gridArea="main" justify="left" align="left">
@@ -109,34 +104,16 @@ const AppGrid = (props) => {
 };
 
 class TPage extends Component {
-  
-  state = {};
-
-  onLogoutClick = (e) => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
-
+  state = {}
   render() {
-    const { user } = this.props.auth;
-    console.log(user)
     return (
       <Grommet>
-        <AppGrid user={user} logout={this.onLogoutClick} />
+        <AppGrid />
+
       </Grommet>
     );
   }
 }
 
-TPage.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(TPage);
 
+export default TPage;
