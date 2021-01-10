@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
 import classnames from "classnames";
+import { Grommet, Box, FormField, Form, Button, TextInput } from "grommet";
 
 class Login extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
     };
   }
 
@@ -26,35 +27,35 @@ class Login extends Component {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard"); // push user to dashboard when they login
     }
-if (nextProps.errors) {
+
+    if (nextProps.errors) {
       this.setState({
-        errors: nextProps.errors
+        errors: nextProps.errors,
       });
     }
   }
 
-
-onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
-console.log(userData);
-this.props.loginUser(userData); 
+    console.log(userData);
+    this.props.loginUser(userData);
   };
-render() {
+
+  render() {
     const { errors } = this.state;
-return (
-      <div >
-        <div>
-          <div>
+    return (
+      <Grommet >
+        <Box justify="center" direction="row-responsive">
+          <Box direction="column" justify="center">
             <Link to="/">
-              <i>keyboard_backspace</i> Back to
-              home
+              <i>keyboard_backspace</i> Back to home
             </Link>
             <div>
               <h4>
@@ -64,71 +65,62 @@ return (
                 Don't have an account? <Link to="/register">Register</Link>
               </p>
             </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div>
-                <input
+            <Box justify="center">
+            <Form>
+              <FormField name="email">
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.email}
                   error={errors.email}
                   id="email"
+                  placeholder="email"
                   type="email"
+                  textAlign="center"
                   className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound
+                    invalid: errors.email || errors.emailnotfound,
                   })}
                 />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email"></label>
                 <span className="red-text">
                   {errors.email}
                   {errors.emailnotfound}
                 </span>
-              </div>
-              <div>
-                <input
+              </FormField>
+                <TextInput
                   onChange={this.onChange}
                   value={this.state.password}
                   error={errors.password}
                   id="password"
                   type="password"
+                  placeholder="password"
+                  textAlign="center"
                   className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
+                    invalid: errors.password || errors.passwordincorrect,
                   })}
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password"></label>
                 <span className="red-text">
                   {errors.password}
                   {errors.passwordincorrect}
                 </span>
-              </div>
-              <div>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+            </Form>
+            <Box pad="medium">
+            <Button noValidate label="login" pad="xlarge" type="submit" onClick={this.onSubmit}/>
+            </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Grommet>
     );
   }
 }
 Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-  };
-  const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-  });
-  export default connect(
-    mapStateToProps,
-    { loginUser }
-  )(Login);
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { loginUser })(Login);

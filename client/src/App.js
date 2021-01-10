@@ -14,7 +14,8 @@ import Sign from "./components/login/Sign";
 import Login from "./components/login/auth/Login";
 import Register from "./components/login/auth/Register";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./components/main/Dashboard";
+
+import TPage from './components/transportation/TPage.jsx'
 
 import "./App.css";
 
@@ -47,7 +48,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={TPage} />
             </Switch>
           </div>
         </BrowserRouter>
