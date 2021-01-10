@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const users = require("./routes/api/users");
 
 const app = express();
-
 
 module.exports = mongoose.model("User", UserSchema);
 
@@ -20,6 +22,12 @@ app.post("/createtrip", (req, res) => {
     Accomadations: req.body,
   };
 });
+
+app.use(passport.initialize());
+
+require("./config/passport")(passport);
+
+app.use("/api/users", users);
 
 app.post("/register", (req, res) => {});
 
