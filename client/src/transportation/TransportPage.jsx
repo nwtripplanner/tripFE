@@ -110,6 +110,20 @@ const TransportPage = (props) => {
 
 
       </div>
+
+      <div className="flexbox-container">
+          <div className="spacer">
+          <When 
+       input={input} 
+       onChange={updateInput}
+      />
+          </div>
+
+
+      </div>
+      
+
+      
       </header>
       </div>
     </>

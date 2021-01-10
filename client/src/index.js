@@ -13,8 +13,8 @@ import TPage from './transportation/TransportPage';
 ReactDOM.render(
   <React.StrictMode>
     {/* <NavBar /> */}
-    <SearchPage />
-    {/* <TPage /> */}
+    {/* <SearchPage /> */}
+    <TPage />
     {/* <Inputes /> */}
   </React.StrictMode>,
   document.getElementById('root')
