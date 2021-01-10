@@ -10,95 +10,95 @@ import Content from './components/content';
 
 
 const AppGrid = () => {
-    const [sidebar, setSidebar] = useState(true);
-  
-    return (
-      <Grommet full theme={grommet}>
-        <Grid
-          fill
-          rows={['auto', 'flex']}
-          columns={['auto', 'flex']}
-          areas={[
-            { name: 'header', start: [0, 0], end: [1, 0] },
-            { name: 'sidebar', start: [0, 1], end: [0, 1] },
-            { name: 'main', start: [1, 1], end: [1, 1] },
-          ]}
+  const [sidebar, setSidebar] = useState(true);
+
+  return (
+    <Grommet full theme={grommet}>
+      <Grid
+        fill
+        rows={['auto', 'flex']}
+        columns={['auto', 'flex']}
+        areas={[
+          { name: 'header', start: [0, 0], end: [1, 0] },
+          { name: 'sidebar', start: [0, 1], end: [0, 1] },
+          { name: 'main', start: [1, 1], end: [1, 1] },
+        ]}
+      >
+        <Box
+          gridArea="header"
+          direction="row"
+          align="center"
+          justify="between"
+          pad={{ horizontal: 'medium', vertical: 'small' }}
+          background="dark-2"
         >
-          <Box
-            gridArea="header"
-            direction="row"
-            align="center"
-            justify="between"
-            pad={{ horizontal: 'medium', vertical: 'small' }}
-            background="dark-2"
-          >
-                <Image
-                src="//v2.grommet.io/logo.png"
-                />
+          <Image
+            src="//v2.grommet.io/logo.png"
+          />
 
-            <Button onClick={() => setSidebar(!sidebar)}>
-              <Text size="large">TripSuite</Text>
-            </Button>
-            <NavBar />
-            <Grommet>
+          <Button onClick={() => setSidebar(!sidebar)}>
+            <Text size="large">TripSuite</Text>
+          </Button>
+          <NavBar />
+          <Grommet>
             <Avatar
-    border={{ size: 'small', color: 'accent-2' }}
-    background="white"
-    flex={false}
-  >
-    SY
-  </Avatar>
-  <Text>Jane Doe</Text> 
-            </Grommet>
-            
-          </Box>
-          {sidebar && (
-            <Box
-              gridArea="sidebar"
-              background="dark-3"
-              width="small"
-              animation={[
-                { type: 'fadeIn', duration: 500 },
-                { type: 'slideRight', size: 'xlarge', duration: 150 },
-              ]}
+              border={{ size: 'small', color: 'accent-2' }}
+              background="white"
+              flex={false}
             >
+              SY
+  </Avatar>
+            <Text>Jane Doe</Text>
+          </Grommet>
 
-                
-                
-              {[  <Avatar
-    border={{ size: 'small', color: 'accent-2' }}
-    background="white"
-    flex={false}
-  >
-    SY
+        </Box>
+        {sidebar && (
+          <Box
+            gridArea="sidebar"
+            background="dark-3"
+            width="small"
+            animation={[
+              { type: 'fadeIn', duration: 500 },
+              { type: 'slideRight', size: 'xlarge', duration: 150 },
+            ]}
+          >
+
+
+
+            {[<Avatar
+              border={{ size: 'small', color: 'accent-2' }}
+              background="white"
+              flex={false}
+            >
+              SY
   </Avatar>,
-  'Transportation', 'Accomodation', 'Lifestyle', 'Costs', 'Plan Trip!'].map(name => (
+              'Transportation', 'Accomodation', 'Lifestyle', 'Costs', 'Plan Trip!'].map(name => (
                 <Button key={name} href="#" hoverIndicator>
                   <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
                     <Text>{name}</Text>
                   </Box>
                 </Button>
               ))}
-            </Box>
-          )}
-          <Box gridArea="main" justify="left" align="left">
-            <Content />
           </Box>
-        </Grid>
-      </Grommet>
-    );
-  };
+        )}
+        <Box gridArea="main" justify="left" align="left">
+          <Content />
+        </Box>
+      </Grid>
+    </Grommet>
+  );
+};
 
 class TPage extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <Grommet>
-                <AppGrid />
+  state = {}
+  render() {
+    return (
+      <Grommet>
+        <AppGrid />
 
-            </Grommet>
-         );
-    }
+      </Grommet>
+    );
+  }
 }
- 
+
 export default TPage;

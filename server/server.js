@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-//const users = require("./routes/api/users");
+const users = require("./routes/api/users");
 const activity = require("./models/Activity");
 const transportation = require("./models/Transportation");
 const accommodation = require("./models/Accommodation");
@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
   })
 });
 
-app.post("/createtrip", (req, res) => {
+app.post("/create/trip", (req, res) => {
   console.log(req.body);
   const newTrip = new trip({
     name: req.body.name,
@@ -48,7 +48,27 @@ app.post("/createtrip", (req, res) => {
     transportations: req.body.transportations,
     accommodations: req.body.accommodations,
     activities: req.body.activities,
-  })
+  });
+  newTrip.save(function (err) {
+    if (err) return handleError(err);
+    res.send(newTrip);
+  });
+});
+
+
+app.post("/create/transportation", (req, res) => {
+  console.log(req.body);
+  const newTransportation = new transportation({
+    time: req.body.time,
+    mode: req.body.mode,
+    start: req.body.start,
+    destination: req.body.destination,
+    cost: req.body.cost
+  });
+  newTransportation.save(function (err) {
+    if (err) return handleError(err);
+    res.send(newTransportation);
+  });
 });
 
 // Returns the activity with the given information for the trip with the given name
