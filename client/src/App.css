@@ -20,9 +20,12 @@
 .App-header {
   background-color: #282c34;
   /* background-image: url(images/deck.jpg); */
+<<<<<<< HEAD
   /* background-image: url(transportation/beach.png); */
   background-image: url(images/deck.jpg);
 
+=======
+>>>>>>> a811434f494ba6cdf2b6d632be5d2198a21b8fa2
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -74,8 +77,12 @@
 }
 
 .rectangle {
+<<<<<<< HEAD
   background-image: url(images/deck.jpg);
   
+=======
+  /* background-image: url(images/deck.jpg); */
+>>>>>>> a811434f494ba6cdf2b6d632be5d2198a21b8fa2
   display: inline-block;
   /* display: flex; */
   align-items: center;
@@ -132,5 +139,3 @@ input[type=text], input[type=password]
   outline: 0ch;
   background-color: '#000000'
 }
-
-
