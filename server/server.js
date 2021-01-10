@@ -40,4 +40,4 @@ app.use("/api/users", users);
 
 app.post("/register", (req, res) => {});
 
-app.listen(3000, () => console.log("started"));
+app.listen(5000, () => console.log("started"));
