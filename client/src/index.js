@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 // import Signup from './signup';
 // import Signin from './signin';
 import SearchPage from './components/SearchPage';
-import TPage from './transportation/TPage';
+import TPage from './components/transportation/TPage';
 import Login from './components/login/auth/Login';
 import Reg from './components/login/auth/Register';
 
-import APage from './accomod/APage';
-import Filter from './accomod/components/filter';
+import APage from './components/accomod/APage';
+import Filter from './components/accomod/components/filter';
 
 
 
